@@ -610,6 +610,13 @@
   });
   el.rankBtn.addEventListener("click", () => { Sound.unlock(); showRanking(null); });
 
+  // ---------- 오프라인 실행(서비스 워커) ----------
+  if ("serviceWorker" in navigator && location.protocol !== "file:") {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("sw.js").catch(() => { /* 오프라인 저장 없이 실행 */ });
+    });
+  }
+
   // ---------- 시작 ----------
   el.testBadge.hidden = !TEST_MODE;
   el.rankMode.hidden = !TEST_MODE;

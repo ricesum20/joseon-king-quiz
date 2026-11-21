@@ -1,0 +1,19 @@
+{
+  "name": "조선의 왕 퀴즈",
+  "short_name": "조선왕퀴즈",
+  "description": "조선의 왕 27명을 맞히는 궁궐 탈출 퀴즈",
+  "lang": "ko",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "any",
+  "background_color": "#8fc9e8",
+  "theme_color": "#c8372d",
+  "icons": [
+    { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "images/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "images/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
