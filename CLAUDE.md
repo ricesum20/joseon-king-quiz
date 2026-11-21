@@ -48,4 +48,11 @@
 
 - 선생님이 문제 문장 검토(교과서 표현) → `questions.js`만 고치면 된다
 - 원하면 GPT·제미나이 이미지로 교체(같은 파일 이름으로 덮어쓰기) → `sw.js`의 `CACHE_VERSION` 올리기
-- GitHub Pages 배포(사용자가 따로 요청할 때)
+- 실제 아이패드·갤럭시 탭에서 소리·화면 키보드·홈 화면 추가 확인
+
+## 배포
+
+- 저장소: https://github.com/ricesum20/joseon-king-quiz (공개, main 브랜치)
+- 주소: https://ricesum20.github.io/joseon-king-quiz/ (GitHub Pages, main 브랜치 루트)
+- 2026-11-21 첫 배포. 배포 주소에서 앱 실행과 오프라인 실행을 확인했다.
+- 고친 뒤 다시 배포하려면: `sw.js`의 `CACHE_VERSION`을 올리고 커밋한 다음 `git push`하면 된다. 1~2분 뒤에 반영된다.
