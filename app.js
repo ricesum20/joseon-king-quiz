@@ -483,7 +483,97 @@
   el.clearBtn.addEventListener("contextmenu", (e) => e.preventDefault());
 
   // ---------- 효과음 ----------
-  /* SOUND_PLACEHOLDER */
+  // 음원 파일 없이 Web Audio API로 소리를 만든다.
+  // 아이패드는 사용자가 누른 순간에만 소리를 켤 수 있어, [시작하기]에서 unlock()을 부른다.
+  const Sound = (() => {
+    let ctx = null;
+    let master = null;
+    let on = store.get(KEY.sound, "on") !== "off";
+
+    function unlock() {
+      try {
+        if (!ctx) {
+          const AC = window.AudioContext || window.webkitAudioContext;
+          if (!AC) return;
+          ctx = new AC();
+          master = ctx.createGain();
+          master.gain.value = 0.5;
+          master.connect(ctx.destination);
+        }
+        if (ctx.state !== "running") ctx.resume();
+        // iOS: 무음 버퍼를 한 번 재생해 잠금을 확실히 푼다.
+        const buf = ctx.createBuffer(1, 1, 22050);
+        const src = ctx.createBufferSource();
+        src.buffer = buf;
+        src.connect(master);
+        src.start(0);
+      } catch { /* 소리 없이 진행 */ }
+    }
+
+    // 음 하나: 주파수(끝 주파수로 미끄러질 수 있음), 시작 시각, 길이, 파형, 크기
+    function note(freq, at, dur, { type = "triangle", gain = 0.6, to = null, attack = 0.01 } = {}) {
+      const t0 = ctx.currentTime + at;
+      const osc = ctx.createOscillator();
+      const g = ctx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, t0);
+      if (to) osc.frequency.exponentialRampToValueAtTime(to, t0 + dur);
+      g.gain.setValueAtTime(0.0001, t0);
+      g.gain.exponentialRampToValueAtTime(gain, t0 + attack);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+      osc.connect(g);
+      g.connect(master);
+      osc.start(t0);
+      osc.stop(t0 + dur + 0.05);
+    }
+
+    function play(fn) {
+      if (!on) return;
+      if (!ctx) unlock();
+      if (!ctx) return;
+      if (ctx.state !== "running") ctx.resume();
+      try { fn(); } catch { /* 무시 */ }
+    }
+
+    return {
+      unlock,
+      get on() { return on; },
+      setOn(v) { on = v; store.set(KEY.sound, v ? "on" : "off"); if (v) unlock(); },
+      // 정답: 따링~ 올라가는 밝은 세 음 (도-미-솔)
+      correct: () => play(() => {
+        note(1046.5, 0.00, 0.18, { gain: 0.5 });
+        note(1318.5, 0.09, 0.18, { gain: 0.5 });
+        note(1568.0, 0.18, 0.55, { gain: 0.55 });
+        note(3136.0, 0.18, 0.4, { type: "sine", gain: 0.12 });
+      }),
+      // 오답: 뚜우웅 내려가는 낮은 음
+      wrong: () => play(() => {
+        note(220, 0, 0.6, { type: "sawtooth", gain: 0.25, to: 110, attack: 0.02 });
+        note(110, 0, 0.6, { type: "square", gain: 0.12, to: 70, attack: 0.02 });
+      }),
+      // 탈출 성공: 짧은 팡파르
+      success: () => play(() => {
+        const seq = [[523.3, 0], [523.3, 0.14], [523.3, 0.28], [659.3, 0.42], [784, 0.62]];
+        seq.forEach(([f, t]) => note(f, t, 0.2, { type: "square", gain: 0.22 }));
+        [523.3, 659.3, 784, 1046.5].forEach((f) => note(f, 0.82, 1.1, { type: "triangle", gain: 0.3 }));
+      }),
+      // 탈출 실패: 아쉬운 짧은 멜로디 (내려가는 음)
+      fail: () => play(() => {
+        [[392, 0], [370, 0.35], [349.2, 0.7]].forEach(([f, t]) => note(f, t, 0.32, { type: "triangle", gain: 0.4 }));
+        note(329.6, 1.05, 0.9, { type: "triangle", gain: 0.4, to: 300 });
+      }),
+    };
+  })();
+
+  function renderSoundBtn() {
+    el.soundBtn.textContent = Sound.on ? "🔊" : "🔇";
+    el.soundBtn.setAttribute("aria-pressed", String(Sound.on));
+    el.soundBtn.setAttribute("aria-label", Sound.on ? "소리 끄기" : "소리 켜기");
+  }
+  // 소리 버튼을 눌러도 입력창 포커스(화면 키보드)는 그대로 둔다.
+  el.soundBtn.addEventListener("pointerdown", (e) => e.preventDefault());
+  el.soundBtn.addEventListener("click", () => { Sound.setOn(!Sound.on); renderSoundBtn(); });
+  renderSoundBtn();
 
   // ---------- 시작 화면 ----------
   function renderStart() {
