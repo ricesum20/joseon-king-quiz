@@ -28,7 +28,7 @@
 ## 진행 상황
 
 - [x] 1. 저장소, CLAUDE.md, 설계서.md
-- [ ] 2. questions.js (27문제)
+- [x] 2. questions.js (27문제)
 - [ ] 3. index.html, style.css
 - [ ] 4. app.js 게임 진행·판정·점수·힌트·이어하기
 - [ ] 5. 결과·순위표
