@@ -75,6 +75,8 @@
     document.documentElement.style.setProperty("--app-h", h + "px");
     document.documentElement.style.setProperty("--app-top", top + "px");
     app.classList.toggle("compact", h < 600);
+    // 아주 촘촘하게: 휴대폰(좁은 화면)에서 낮아졌을 때, 또는 어떤 기기든 아주 낮을 때
+    app.classList.toggle("tight", h < 340 || (h < 600 && window.innerWidth < 600));
   }
   if (window.visualViewport) {
     visualViewport.addEventListener("resize", fitViewport);
@@ -290,12 +292,12 @@
     if (game.cur.wrong >= MAX_TRIES) {
       busy = true;
       el.input.readOnly = true;
-      setFeedback("bad", "아쉬워요! 다음 문제로 넘어가요");
+      setFeedback("bad", "아쉬워요! 다음 문제로");
       el.hint.hidden = true;
       finishQuestion(false);
       return;
     }
-    setFeedback("bad", game.cur.wrong === 1 ? "틀렸어요! 힌트를 보고 다시 해 봐요" : "한 번 더! 마지막 기회예요");
+    setFeedback("bad", game.cur.wrong === 1 ? "틀렸어요!" : "마지막 기회!");
     renderHint();
     saveProgress();
     el.input.value = "";

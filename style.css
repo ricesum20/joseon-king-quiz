@@ -278,10 +278,16 @@ button, input { font: inherit; color: inherit; }
 .answer-input.bad { border-color: var(--bad); background: #fdeceb; }
 .btn-submit { height: 80px; font-size: 32px; padding: 0 32px; }
 
+/* 안내 + 힌트: 카드와 입력창 사이 한 줄 (화면 키보드에 가려지지 않는 자리) */
+.status-row {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 8px 12px;
+}
+.status-row:has(.feedback:empty):has(.hint[hidden]) { display: none; }
 .feedback {
   min-height: 0;
   text-align: center; font-weight: 800;
-  font-size: clamp(26px, 3.4vw, 34px);
+  font-size: clamp(22px, 3.2vw, 32px);
 }
 .feedback:empty { display: none; }
 .feedback .ok  { color: #fff; background: var(--ok); padding: 6px 22px; border-radius: 14px; display: inline-block; }
@@ -289,10 +295,9 @@ button, input { font: inherit; color: inherit; }
 .feedback .info { color: var(--meok); background: rgba(255,255,255,.92); padding: 6px 22px; border-radius: 14px; display: inline-block; }
 
 .hint {
-  align-self: center;
   background: #fff8e1; border: 4px dashed var(--gold);
-  border-radius: 16px; padding: 8px 26px;
-  font-size: clamp(24px, 3.2vw, 32px); font-weight: 800;
+  border-radius: 16px; padding: 4px 22px;
+  font-size: clamp(22px, 3.2vw, 32px); font-weight: 800;
 }
 .hint b { font-size: 1.4em; letter-spacing: .15em; color: var(--dahong); }
 
@@ -313,6 +318,25 @@ button, input { font: inherit; color: inherit; }
 .app.compact .hint { padding: 4px 18px; }
 .app.compact .feedback > span { padding: 2px 16px; }
 .app.compact .test-badge { display: none; }
+.app.compact .status-row { gap: 4px 8px; }
+
+/* 아주 낮은 화면(휴대폰 + 화면 키보드): 문제·힌트·입력창이 한 화면에 들어오게 */
+.app.tight .topbar { gap: 4px; margin-right: 48px; }
+.app.tight .tb-item { padding: 2px 10px; font-size: 14px; }
+.app.tight .sound-btn { width: 38px; height: 38px; font-size: 17px; top: 3px; border-width: 2px; }
+.app.tight #screen-quiz { gap: 4px; padding-top: 4px; padding-left: 8px; padding-right: 8px; }
+.app.tight .quiz-main { gap: 5px; }
+.app.tight .card { padding: 8px 12px 10px; border-width: 3px; outline: none; border-radius: 14px; }
+.app.tight .badge { font-size: 15px; padding: 1px 8px; margin: 0 6px 0 0; border-radius: 6px; vertical-align: 3px; }
+.app.tight .q-text { display: inline; font-size: 21px; line-height: 1.35; }
+.app.tight .seal-slot { width: 64px; height: 64px; right: 6px; bottom: -6px; }
+.app.tight .pop-minus { font-size: 40px; right: 14px; top: 0; }
+.app.tight .hint, .app.tight .feedback { font-size: 19px; }
+.app.tight .hint { padding: 1px 12px; border-width: 3px; border-radius: 10px; }
+.app.tight .feedback > span { padding: 1px 12px; border-radius: 10px; }
+.app.tight .answer-input, .app.tight .btn-submit { height: 52px; border-radius: 12px; }
+.app.tight .answer-input { font-size: 26px; border-width: 4px; padding: 0 12px; }
+.app.tight .btn-submit { font-size: 20px; padding: 0 16px; }
 
 /* ---------- 3·4. 결과·순위표 공통 패널 ---------- */
 #screen-result, #screen-rank { align-items: center; overflow-y: auto; -webkit-overflow-scrolling: touch; }
@@ -394,8 +418,9 @@ button, input { font: inherit; color: inherit; }
 
 /* 세로 화면·좁은 화면 */
 @media (max-width: 600px) {
-  .answer-row { flex-direction: column; }
-  .btn-submit { width: 100%; }
+  /* 휴대폰: [제출]은 입력창 옆에 그대로 둔다(아래로 내리면 키보드에 가려짐) */
+  .answer-input { font-size: 30px; padding: 0 14px; }
+  .btn-submit { font-size: 22px; padding: 0 18px; }
   .rank-table th:last-child, .rank-table td:last-child { display: none; }
   .rank-table td:nth-last-child(2) { border-radius: 0 12px 12px 0; }
 }

@@ -69,6 +69,12 @@
           <div id="popMinus" class="pop-minus" aria-hidden="true"></div>
         </article>
 
+        <!-- 안내와 힌트는 입력창 '위'에 둔다: 화면 키보드가 올라와도 가려지지 않게 -->
+        <div class="status-row">
+          <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+          <div id="hint" class="hint" aria-live="polite" hidden></div>
+        </div>
+
         <form id="answerForm" class="answer-row" autocomplete="off" novalidate>
           <input id="answerInput" class="answer-input" type="text" inputmode="text" lang="ko"
                  placeholder="정답을 적어 주세요" aria-label="정답 입력"
@@ -76,9 +82,6 @@
                  enterkeyhint="done" maxlength="20">
           <button id="submitBtn" class="btn btn-primary btn-submit" type="submit">제출</button>
         </form>
-
-        <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
-        <div id="hint" class="hint" aria-live="polite" hidden></div>
       </div>
     </section>
 
