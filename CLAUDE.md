@@ -31,7 +31,7 @@
 - [x] 2. questions.js (27문제)
 - [x] 3. index.html, style.css
 - [x] 4. app.js 게임 진행·판정·점수·힌트·이어하기
-- [ ] 5. 결과·순위표
+- [x] 5. 결과·순위표
 - [ ] 6. 효과음
 - [ ] 7. 그림과 아이콘
 - [ ] 8. PWA(manifest, sw)

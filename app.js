@@ -391,7 +391,96 @@
   }
 
   // ---------- 순위표 ----------
-  /* RANKING_PLACEHOLDER */
+  // 기록은 모두 남겨 두고(10위 밖 순위 계산용), 화면에는 1~10위만 보여 준다.
+  // 정렬: 점수 높은 순 → 시간 짧은 순 → 먼저 세운 기록 순
+  function loadRanking() {
+    const list = store.get(KEY.ranking, []);
+    return Array.isArray(list) ? list.filter((r) => r && typeof r.score === "number") : [];
+  }
+  function sortRanking(list) {
+    return list.slice().sort((a, b) => b.score - a.score || a.time - b.time || a.id - b.id);
+  }
+
+  el.saveForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (!lastResult || lastResult.saved) return;
+    const name = el.nameInput.value.trim().replace(/\s+/g, " ");
+    const len = Array.from(name).length;
+    if (len === 0) { el.saveMsg.textContent = "닉네임을 적어 주세요"; el.nameInput.focus(); return; }
+    if (len > NAME_MAX) { el.saveMsg.textContent = `닉네임은 ${NAME_MAX}글자까지예요`; el.nameInput.focus(); return; }
+    const record = {
+      id: Date.now(),
+      name,
+      score: lastResult.score,
+      time: lastResult.time,
+      success: lastResult.success,
+      date: todayStr(),
+    };
+    const list = sortRanking([...loadRanking(), record]).slice(0, 500);
+    store.set(KEY.ranking, list);
+    lastResult.saved = true;
+    el.nameInput.blur();
+    showRanking(record.id);
+  });
+  // 조합 중 엔터로 닉네임 마지막 글자가 잘리지 않게
+  el.nameInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && (e.isComposing || e.keyCode === 229)) e.preventDefault();
+  });
+  el.skipSaveBtn.addEventListener("click", () => { lastResult = null; renderStart(); });
+
+  function showRanking(highlightId) {
+    const list = sortRanking(loadRanking());
+    const top = list.slice(0, 10);
+    el.rankBody.innerHTML = top.map((r, i) => {
+      const rank = i + 1;
+      const medal = rank <= 3 ? `<span class="medal m${rank}">${rank}</span>` : `${rank}`;
+      const mine = r.id === highlightId ? ' class="mine"' : "";
+      const mark = r.success ? " 🏯" : "";
+      return `<tr${mine}><td>${medal}</td><td class="name">${escapeHtml(r.name)}${mark}</td>` +
+             `<td>${r.score}점</td><td>${fmtTime(r.time)}</td><td>${escapeHtml(r.date || "")}</td></tr>`;
+    }).join("");
+    el.rankEmpty.hidden = list.length > 0;
+    const myIndex = highlightId == null ? -1 : list.findIndex((r) => r.id === highlightId);
+    el.myRank.hidden = !(myIndex >= 10);
+    if (myIndex >= 10) el.myRank.textContent = `내 순위: ${myIndex + 1}위`;
+    lastResult = null;
+    app.classList.remove("escape");
+    showScreen("rank");
+  }
+
+  el.againBtn.addEventListener("click", startNew);
+  el.homeBtn.addEventListener("click", renderStart);
+
+  // [기록 지우기]: 3초 동안 계속 눌러야 지워진다.
+  const HOLD_MS = 3000;
+  const holdLabel = el.clearBtn.querySelector(".hold-label");
+  const HOLD_TEXT = holdLabel.textContent;
+  let holdTimer = null;
+  function holdStart(e) {
+    e.preventDefault();
+    if (holdTimer) return;
+    el.clearBtn.classList.add("holding");
+    holdLabel.textContent = "계속 누르고 있어요…";
+    holdTimer = setTimeout(() => {
+      holdTimer = null;
+      store.remove(KEY.ranking);
+      el.clearBtn.classList.remove("holding");
+      holdLabel.textContent = "기록을 모두 지웠어요";
+      Sound.wrong();
+      showRanking(null);
+      setTimeout(() => { holdLabel.textContent = HOLD_TEXT; }, 2000);
+    }, HOLD_MS);
+  }
+  function holdCancel() {
+    if (!holdTimer) return;
+    clearTimeout(holdTimer);
+    holdTimer = null;
+    el.clearBtn.classList.remove("holding");
+    holdLabel.textContent = HOLD_TEXT;
+  }
+  el.clearBtn.addEventListener("pointerdown", holdStart);
+  ["pointerup", "pointerleave", "pointercancel"].forEach((t) => el.clearBtn.addEventListener(t, holdCancel));
+  el.clearBtn.addEventListener("contextmenu", (e) => e.preventDefault());
 
   // ---------- 효과음 ----------
   /* SOUND_PLACEHOLDER */
