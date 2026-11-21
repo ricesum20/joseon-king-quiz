@@ -1,40 +1,124 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
-  <!-- 홈 화면 아이콘: 다홍 단색 배경에 익선관 쓴 왕 얼굴, 글자 없음. Claude가 그린 그림.
-       가장자리가 잘려도(maskable) 얼굴이 안전 영역(가운데 80%) 안에 들어오게 그렸다. -->
+  <!-- 자동 생성: tools/make-icon.py (원본 king.svg). 직접 고치지 말 것 -->
   <defs>
-    <radialGradient id="face" cx="0.45" cy="0.4" r="0.65">
-      <stop offset="0" stop-color="#fde6cc"/><stop offset="1" stop-color="#f3cda6"/>
+    <linearGradient id="robe" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c23128"/><stop offset="1" stop-color="#8f1f1a"/>
+    </linearGradient>
+    <linearGradient id="sleeve" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8f1f1a"/><stop offset="1" stop-color="#b52c24"/>
+    </linearGradient>
+    <radialGradient id="face" cx="0.5" cy="0.42" r="0.62">
+      <stop offset="0" stop-color="#f8dcc0"/><stop offset="1" stop-color="#e9bf98"/>
     </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f6d675"/><stop offset="1" stop-color="#c8951e"/>
+    </linearGradient>
+    <linearGradient id="hat" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a3a44"/><stop offset="1" stop-color="#18181e"/>
+    </linearGradient>
+    <linearGradient id="wing" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4a4a56"/><stop offset="1" stop-color="#24242c"/>
+    </linearGradient>
+    <clipPath id="robeClip">
+      <path d="M296 650 C 250 710 232 850 238 1000 L 786 1000 C 792 850 774 710 728 650 C 664 612 360 612 296 650 Z"/>
+    </clipPath>
+    <!-- 용무늬 보(둥근 금빛 무늬) -->
+    <g id="bo">
+      <circle r="80" fill="url(#gold)" stroke="#6b4a10" stroke-width="5"/>
+      <circle r="66" fill="none" stroke="#9a6d12" stroke-width="3"/>
+      <!-- 여의주를 감싼 용 -->
+      <path d="M-38 34 C -58 4 -40 -40 -2 -44 C 34 -48 54 -18 40 8 C 28 30 -2 30 -10 12 C -16 -2 -4 -16 10 -12"
+            fill="none" stroke="#a3261f" stroke-width="11" stroke-linecap="round"/>
+      <path d="M-38 34 C -58 4 -40 -40 -2 -44 C 34 -48 54 -18 40 8 C 28 30 -2 30 -10 12 C -16 -2 -4 -16 10 -12"
+            fill="none" stroke="#f6d675" stroke-width="3" stroke-dasharray="4 7" stroke-linecap="round"/>
+      <path d="M-44 30 l -14 10 l 18 0 z M30 -40 l 10 -16 l 4 18 z M44 -2 l 16 -4 l -10 14 z" fill="#a3261f"/>
+      <circle cx="12" cy="-8" r="7" fill="#fff4cf" stroke="#a3261f" stroke-width="3"/>
+      <path d="M-30 52 q 10 -10 20 0 q 10 -10 20 0 q 10 -10 20 0" fill="none" stroke="#a3261f" stroke-width="5" stroke-linecap="round"/>
+    </g>
   </defs>
-  <rect width="512" height="512" fill="#c8372d"/>
-  <circle cx="256" cy="270" r="196" fill="none" stroke="#d9a520" stroke-width="10" opacity=".55"/>
+  <rect width="512" height="512" fill="#1e3a5f"/>
+  <circle cx="256" cy="262" r="214" fill="#24466f"/>
+  <circle cx="256" cy="262" r="214" fill="none" stroke="#d9a520" stroke-width="10"/>
+  <g transform="translate(-63 22) scale(0.62)">
+    <g id="king">
+    <!-- 소매 -->
+    <g stroke="#2e1b10" stroke-width="7" stroke-linejoin="round">
+      <path d="M300 660 C 220 720 182 830 186 970 C 240 992 300 990 344 972 L 360 720 Z" fill="url(#sleeve)"/>
+      <path d="M724 660 C 804 720 842 830 838 970 C 784 992 724 990 680 972 L 664 720 Z" fill="url(#sleeve)" transform="scale(1 1)"/>
+    </g>
+    <!-- 몸통(곤룡포) -->
+    <path d="M296 650 C 250 710 232 850 238 1000 L 786 1000 C 792 850 774 710 728 650 C 664 612 360 612 296 650 Z"
+          fill="url(#robe)" stroke="#2e1b10" stroke-width="7" stroke-linejoin="round"/>
+    <!-- 어깨의 보 -->
+    <g clip-path="url(#robeClip)">
+      <use href="#bo" transform="translate(338 712) scale(.62)"/>
+      <use href="#bo" transform="translate(686 712) scale(.62)"/>
+    </g>
+    <!-- 둥근 깃(단령)과 흰 동정 -->
+    <path d="M404 632 Q 512 736 620 632" fill="none" stroke="#6e1612" stroke-width="16" stroke-linecap="round"/>
+    <path d="M454 630 L 512 694 L 570 630" fill="none" stroke="#f4efe2" stroke-width="16" stroke-linejoin="round"/>
+    <path d="M470 626 L 512 674 L 554 626 Z" fill="#a3261f"/>
+    <!-- 가슴의 보 -->
+    <use href="#bo" transform="translate(512 800)"/>
+    <!-- 옥대 -->
+    <path d="M250 902 Q 512 940 774 902 L 776 946 Q 512 984 248 946 Z" fill="#23262d" stroke="#2e1b10" stroke-width="6"/>
+    <g fill="#dfe8da" stroke="#8aa08a" stroke-width="4">
+      <rect x="300" y="914" width="44" height="26" rx="6"/><rect x="384" y="922" width="44" height="26" rx="6"/>
+      <rect x="490" y="926" width="44" height="26" rx="6"/>
+      <rect x="596" y="922" width="44" height="26" rx="6"/><rect x="680" y="914" width="44" height="26" rx="6"/>
+    </g>
 
-  <!-- 익선관 날개 -->
-  <g stroke="#3a2416" stroke-width="7">
-    <ellipse cx="160" cy="150" rx="36" ry="54" transform="rotate(-24 160 150)" fill="#2b2b33"/>
-    <ellipse cx="352" cy="150" rx="36" ry="54" transform="rotate(24 352 150)" fill="#2b2b33"/>
+    <!-- 목 -->
+    <path d="M462 590 L 462 640 Q 512 662 562 640 L 562 590 Z" fill="#e2b48b"/>
+
+    <!-- 익선관 날개: 뒤쪽 높은 모자(모정)에서 위로 곧게 선 매미 날개 -->
+    <!-- 둥글고 넓은 두 날개가 가운데에서 맞닿아 모자 위로 조금만 솟는다 -->
+    <g stroke="#111116" stroke-width="6" stroke-linejoin="round">
+      <path d="M514 232 C 466 236 420 222 412 184 C 404 140 440 108 482 112 C 508 116 518 150 514 232 Z" fill="url(#wing)"/>
+      <path d="M510 232 C 558 236 604 222 612 184 C 620 140 584 108 542 112 C 516 116 506 150 510 232 Z" fill="url(#wing)"/>
+    </g>
+    <g fill="none" stroke="#6a6a78" stroke-width="3" opacity=".85" stroke-linecap="round">
+      <path d="M500 222 C 466 202 436 176 432 146"/><path d="M506 214 C 486 184 474 156 476 126"/>
+      <path d="M524 222 C 558 202 588 176 592 146"/><path d="M518 214 C 538 184 550 156 548 126"/>
+    </g>
+
+    <!-- 귀 -->
+    <g fill="url(#face)" stroke="#2e1b10" stroke-width="6">
+      <ellipse cx="350" cy="452" rx="26" ry="40"/>
+      <ellipse cx="674" cy="452" rx="26" ry="40"/>
+    </g>
+    <!-- 얼굴 -->
+    <path d="M354 380 C 354 300 420 262 512 262 C 604 262 670 300 670 380 C 670 500 628 610 512 618 C 396 610 354 500 354 380 Z"
+          fill="url(#face)" stroke="#2e1b10" stroke-width="6"/>
+
+    <!-- 익선관 모자: 뒤쪽 높은 모정 + 앞쪽 낮은 모자 + 띠 -->
+    <g stroke="#111116" stroke-width="6" stroke-linejoin="round">
+      <path d="M420 246 C 420 176 460 150 512 150 C 564 150 604 176 604 246 Z" fill="url(#hat)"/>
+      <path d="M346 318 C 346 252 410 220 512 220 C 614 220 678 252 678 318 Z" fill="url(#hat)"/>
+      <path d="M336 312 Q 512 292 688 312 L 690 352 Q 512 334 334 352 Z" fill="#141418"/>
+    </g>
+    <path d="M440 176 Q 512 160 584 176" fill="none" stroke="#5c5c6a" stroke-width="5" stroke-linecap="round"/>
+    <path d="M380 262 Q 512 236 644 262" fill="none" stroke="#4c4c58" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- 눈썹 -->
+    <path d="M404 404 Q 444 384 484 398 L 482 410 Q 446 400 408 414 Z" fill="#1f140c"/>
+    <path d="M620 404 Q 580 384 540 398 L 542 410 Q 578 400 616 414 Z" fill="#1f140c"/>
+    <!-- 눈: 차분하고 곧은 눈매 -->
+    <path d="M414 446 Q 448 426 484 444" fill="none" stroke="#1f140c" stroke-width="7" stroke-linecap="round"/>
+    <path d="M610 446 Q 576 426 540 444" fill="none" stroke="#1f140c" stroke-width="7" stroke-linecap="round"/>
+    <ellipse cx="450" cy="447" rx="12" ry="11" fill="#1f140c"/>
+    <ellipse cx="574" cy="447" rx="12" ry="11" fill="#1f140c"/>
+    <circle cx="454" cy="443" r="3.5" fill="#fff"/>
+    <circle cx="578" cy="443" r="3.5" fill="#fff"/>
+    <!-- 코 -->
+    <path d="M506 462 Q 498 500 504 512 Q 512 518 522 512" fill="none" stroke="#b98462" stroke-width="5" stroke-linecap="round"/>
+    <!-- 콧수염 -->
+    <path d="M512 534 C 488 526 458 536 432 568 C 462 552 488 548 512 552 Z" fill="#1f140c"/>
+    <path d="M512 534 C 536 526 566 536 592 568 C 562 552 536 548 512 552 Z" fill="#1f140c"/>
+    <!-- 입 -->
+    <path d="M488 568 Q 512 578 536 568" fill="none" stroke="#7a3b2a" stroke-width="5" stroke-linecap="round"/>
+    <!-- 턱수염 -->
+    <path d="M492 594 Q 512 600 532 594 Q 532 650 512 690 Q 492 650 492 594 Z" fill="#1f140c"/>
   </g>
-  <!-- 얼굴 -->
-  <g stroke="#3a2416" stroke-width="7">
-    <ellipse cx="128" cy="300" rx="22" ry="28" fill="url(#face)"/>
-    <ellipse cx="384" cy="300" rx="22" ry="28" fill="url(#face)"/>
-    <ellipse cx="256" cy="292" rx="134" ry="124" fill="url(#face)"/>
   </g>
-  <!-- 익선관 -->
-  <g stroke="#3a2416" stroke-width="7" stroke-linejoin="round">
-    <path d="M128 236 C 128 150 186 118 256 118 C 326 118 384 150 384 236 Z" fill="#2b2b33"/>
-    <path d="M192 186 C 192 128 222 100 256 100 C 290 100 320 128 320 186 Z" fill="#33333d"/>
-    <rect x="120" y="216" width="272" height="36" rx="16" fill="#22222a"/>
-  </g>
-  <!-- 눈·볼·수염·입 -->
-  <g fill="#3a2416">
-    <ellipse cx="210" cy="300" rx="14" ry="18"/>
-    <ellipse cx="302" cy="300" rx="14" ry="18"/>
-  </g>
-  <circle cx="215" cy="293" r="5" fill="#fff"/>
-  <circle cx="307" cy="293" r="5" fill="#fff"/>
-  <ellipse cx="180" cy="340" rx="24" ry="14" fill="#f49a8a" opacity=".6"/>
-  <ellipse cx="332" cy="340" rx="24" ry="14" fill="#f49a8a" opacity=".6"/>
-  <path d="M228 356 C 240 348 250 351 256 357 C 262 351 272 348 284 356 C 275 361 264 363 256 360 C 248 363 237 361 228 356 Z" fill="#3a2416"/>
-  <path d="M236 370 Q 256 390 276 370" fill="none" stroke="#3a2416" stroke-width="7" stroke-linecap="round"/>
 </svg>
