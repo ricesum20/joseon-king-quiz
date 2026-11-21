@@ -124,7 +124,8 @@ button, input { font: inherit; color: inherit; }
 }
 .test-badge {
   position: absolute; z-index: 5;
-  top: max(14px, env(safe-area-inset-top)); left: max(14px, env(safe-area-inset-left));
+  bottom: max(12px, env(safe-area-inset-bottom)); left: max(12px, env(safe-area-inset-left));
+  pointer-events: none; opacity: .9;
   background: var(--namsaek); color: #fff; font-weight: 800;
   padding: 6px 14px; border-radius: 999px; font-size: 16px;
 }
@@ -377,10 +378,10 @@ button, input { font: inherit; color: inherit; }
 .medal.m1 { background: linear-gradient(135deg, #f7d860, #c99a12); color: #5a3d00; }
 .medal.m2 { background: linear-gradient(135deg, #eef0f2, #a4abb3); color: #333; }
 .medal.m3 { background: linear-gradient(135deg, #e7a46c, #a8642b); }
-.rank-table tr.mine td { background: #fff3c4; animation: glow 1s ease-in-out infinite alternate; }
+.rank-table tr.mine td { animation: glow .8s ease-in-out infinite alternate; color: var(--dahong-dark); }
 @keyframes glow {
-  from { box-shadow: inset 0 0 0 3px var(--gold); }
-  to   { box-shadow: inset 0 0 0 3px var(--dahong), 0 0 18px rgba(217,165,32,.8); }
+  from { background: #fff3c4; }
+  to   { background: #ffd35c; }
 }
 .rank-empty { font-size: 22px; font-weight: 700; }
 .my-rank { font-size: 24px; font-weight: 800; color: var(--dahong-dark); background: #fff3c4; border-radius: 12px; padding: 8px; }
