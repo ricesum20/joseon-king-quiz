@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- 곤룡포와 익선관 차림의 귀여운 왕 캐릭터(특정 왕이 아님). Claude가 그린 그림. 배경 투명 -->
+  <defs>
+    <linearGradient id="robe" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d9433a"/><stop offset="1" stop-color="#b3302a"/>
+    </linearGradient>
+    <radialGradient id="face" cx="0.45" cy="0.4" r="0.65">
+      <stop offset="0" stop-color="#fde6cc"/><stop offset="1" stop-color="#f3cda6"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7d867"/><stop offset="1" stop-color="#cf9a1c"/>
+    </linearGradient>
+  </defs>
+  <g stroke="#3a2416" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+    <!-- 소매 -->
+    <path d="M300 640 C 210 680 170 790 190 900 C 250 940 330 930 380 900 L 400 700 Z" fill="url(#robe)"/>
+    <path d="M724 640 C 814 680 854 790 834 900 C 774 940 694 930 644 900 L 624 700 Z" fill="url(#robe)"/>
+    <!-- 몸통(곤룡포) -->
+    <path d="M330 610 C 300 700 280 860 300 990 L 724 990 C 744 860 724 700 694 610 C 640 580 384 580 330 610 Z" fill="url(#robe)"/>
+    <!-- 손 -->
+    <ellipse cx="300" cy="905" rx="52" ry="40" fill="url(#face)"/>
+    <ellipse cx="724" cy="905" rx="52" ry="40" fill="url(#face)"/>
+    <!-- 둥근 깃(단령)과 속깃 -->
+    <path d="M400 606 Q 512 700 624 606" fill="none" stroke-width="14"/>
+    <path d="M452 612 L 512 668 L 572 612" fill="#f6f1e4"/>
+    <!-- 옥대 -->
+    <rect x="296" y="842" width="432" height="44" rx="14" fill="#2b2f36"/>
+    <g fill="#e9f0e6" stroke-width="6">
+      <rect x="350" y="850" width="40" height="28" rx="5"/><rect x="430" y="850" width="40" height="28" rx="5"/>
+      <rect x="554" y="850" width="40" height="28" rx="5"/><rect x="634" y="850" width="40" height="28" rx="5"/>
+    </g>
+    <!-- 가슴의 보(둥근 용무늬) -->
+    <circle cx="512" cy="752" r="74" fill="url(#gold)"/>
+    <path d="M470 770 C 470 720 530 705 548 735 C 562 760 530 780 512 765 C 498 752 515 735 528 745" fill="none" stroke="#b3302a" stroke-width="10"/>
+    <path d="M476 785 q 18 14 40 6 q 26 -10 44 4" fill="none" stroke="#b3302a" stroke-width="8"/>
+  </g>
+
+  <!-- 익선관 뒤 날개(매미 날개 모양) -->
+  <g stroke="#3a2416" stroke-width="10">
+    <ellipse cx="350" cy="190" rx="62" ry="92" transform="rotate(-24 350 190)" fill="#2b2b33"/>
+    <ellipse cx="674" cy="190" rx="62" ry="92" transform="rotate(24 674 190)" fill="#2b2b33"/>
+  </g>
+  <ellipse cx="352" cy="186" rx="34" ry="60" transform="rotate(-24 352 186)" fill="#4a4a56"/>
+  <ellipse cx="672" cy="186" rx="34" ry="60" transform="rotate(24 672 186)" fill="#4a4a56"/>
+
+  <!-- 얼굴 -->
+  <g stroke="#3a2416" stroke-width="10">
+    <ellipse cx="282" cy="430" rx="34" ry="44" fill="url(#face)"/>
+    <ellipse cx="742" cy="430" rx="34" ry="44" fill="url(#face)"/>
+    <ellipse cx="512" cy="420" rx="228" ry="208" fill="url(#face)"/>
+  </g>
+  <!-- 익선관 -->
+  <g stroke="#3a2416" stroke-width="10" stroke-linejoin="round">
+    <path d="M300 330 C 300 190 400 140 512 140 C 624 140 724 190 724 330 Z" fill="#2b2b33"/>
+    <path d="M410 250 C 410 160 460 110 512 110 C 564 110 614 160 614 250 Z" fill="#33333d"/>
+    <rect x="290" y="300" width="444" height="56" rx="24" fill="#22222a"/>
+  </g>
+  <path d="M440 170 Q 512 130 584 170" fill="none" stroke="#5b5b68" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- 눈·볼·입·수염 -->
+  <g fill="#3a2416">
+    <ellipse cx="430" cy="430" rx="22" ry="28"/>
+    <ellipse cx="594" cy="430" rx="22" ry="28"/>
+  </g>
+  <circle cx="438" cy="420" r="8" fill="#fff"/>
+  <circle cx="602" cy="420" r="8" fill="#fff"/>
+  <ellipse cx="380" cy="490" rx="40" ry="24" fill="#f49a8a" opacity=".6"/>
+  <ellipse cx="644" cy="490" rx="40" ry="24" fill="#f49a8a" opacity=".6"/>
+  <path d="M470 520 C 490 508 506 512 512 522 C 518 512 534 508 554 520 C 540 528 524 530 512 526 C 500 530 484 528 470 520 Z" fill="#3a2416"/>
+  <path d="M482 540 Q 512 570 542 540" fill="none" stroke="#3a2416" stroke-width="10" stroke-linecap="round"/>
+  <path d="M500 588 q 12 22 24 0" fill="#3a2416"/>
+</svg>

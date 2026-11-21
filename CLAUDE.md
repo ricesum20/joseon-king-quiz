@@ -14,7 +14,7 @@
   - 현재 이미지는 Claude가 SVG로 그린 그림이다(원본 `images/src/*.svg`). 다른 이미지로 바꿀 때는 같은 이름으로 덮어쓰면 된다.
   - SVG를 PNG·WebP로 바꿀 때는 `tools/render.sh`(Chrome 헤드리스)를 쓴다.
 - 저장소는 localStorage만 쓴다. 로그인·서버·외부 전송·개인정보 수집 없음(닉네임은 기기 안에만 저장).
-- 테스트 모드: 주소 뒤에 `?test=1`을 붙이면 3문제만 낸다(순위표에는 저장하지 않는다).
+- 테스트 모드: 주소 뒤에 `?test=1`을 붙이면 3문제만 낸다. 기록과 이어하기는 테스트 전용 키(`jkq.ranking.test`, `jkq.progress.test`)에 따로 저장해 실제 순위표를 더럽히지 않는다.
 - 파일을 고치면 `sw.js`의 `CACHE_VERSION`을 올린다. 그래야 태블릿이 새 버전을 받는다.
 - 커밋 메시지는 한국어로, 단계마다 커밋한다.
 - '정해야 할 것'은 설계서 기본값을 따른다. 탈출 성공은 27문제를 모두 맞힌 경우(힌트 후 맞힌 것 포함)이고, 세 번 틀리면 정답을 보여 주지 않고 결과 화면에서만 공개한다. 짧은 이름은 '조선왕퀴즈'다.
@@ -22,7 +22,8 @@
 ## localStorage 키
 
 - `jkq.ranking`: 순위 기록 배열 `{ name, score, time, success, date, id }`
-- `jkq.progress`: 진행 중인 게임(이어하기용)
+- `jkq.progress`: 진행 중인 게임(이어하기용) `{ v, total, remaining:[no], cur:{no, wrong}, done:[{no, wrong, solved}], penalty, elapsedMs }`
+- 테스트 모드는 위 두 키 뒤에 `.test`가 붙는다.
 - `jkq.sound`: 소리 켜기/끄기 (`"on"` / `"off"`)
 
 ## 진행 상황
@@ -33,6 +34,6 @@
 - [x] 4. app.js 게임 진행·판정·점수·힌트·이어하기
 - [x] 5. 결과·순위표
 - [x] 6. 효과음
-- [ ] 7. 그림과 아이콘
+- [x] 7. 그림과 아이콘
 - [ ] 8. PWA(manifest, sw)
 - [ ] 9. 브라우저 확인

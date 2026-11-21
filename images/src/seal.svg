@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- 정답 때 찍히는 붉은 옥새 도장. Claude가 그린 그림. 배경 투명 -->
+  <defs>
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="2" seed="7" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -5 3.9" result="mask"/>
+      <feComposite in="SourceGraphic" in2="mask" operator="in"/>
+    </filter>
+  </defs>
+  <g filter="url(#rough)" fill="#c8372d">
+    <path fill-rule="evenodd" d="M56 40 H456 Q472 40 472 56 V456 Q472 472 456 472 H56 Q40 472 40 456 V56 Q40 40 56 40 Z
+                                 M80 76 Q76 76 76 80 V432 Q76 436 80 436 H432 Q436 436 436 432 V80 Q436 76 432 76 Z"/>
+    <rect x="96" y="96" width="320" height="320" fill="none" stroke="#c8372d" stroke-width="8"/>
+    <text x="256" y="236" text-anchor="middle" font-family="AppleMyungjo, 'Nanum Myeongjo', 'Noto Serif KR', serif" font-weight="700" font-size="150" stroke="#c8372d" stroke-width="7">정</text>
+    <text x="256" y="392" text-anchor="middle" font-family="AppleMyungjo, 'Nanum Myeongjo', 'Noto Serif KR', serif" font-weight="700" font-size="150" stroke="#c8372d" stroke-width="7">답</text>
+  </g>
+</svg>

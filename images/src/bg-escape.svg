@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 1536" width="2048" height="1536">
+  <!-- 궁궐 정문(광화문 느낌)이 열리고 빛이 쏟아지는 장면. Claude가 그린 그림 -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd98a"/>
+      <stop offset="1" stop-color="#fff3cf"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.62" r="0.6">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.35" stop-color="#fffbe6"/>
+      <stop offset="1" stop-color="#ffe39a"/>
+    </radialGradient>
+    <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fffbe8" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#fffbe8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="roof" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#55606b"/><stop offset="1" stop-color="#39424b"/>
+    </linearGradient>
+    <pattern id="tiles" width="22" height="40" patternUnits="userSpaceOnUse">
+      <rect width="22" height="40" fill="url(#roof)"/>
+      <rect width="7" height="40" fill="#2e353c" opacity=".55"/>
+    </pattern>
+    <pattern id="dancheong" width="64" height="34" patternUnits="userSpaceOnUse">
+      <rect width="64" height="34" fill="#1f7a6d"/>
+      <rect x="4" y="4" width="24" height="26" rx="6" fill="#2fa08c"/>
+      <circle cx="16" cy="17" r="7" fill="#f2efe4"/>
+      <circle cx="16" cy="17" r="3.5" fill="#c8372d"/>
+      <rect x="34" y="6" width="26" height="22" fill="#c8372d"/>
+      <rect x="40" y="11" width="14" height="12" fill="#f2cf63"/>
+    </pattern>
+    <pattern id="blocks" width="120" height="70" patternUnits="userSpaceOnUse">
+      <rect width="120" height="70" fill="#d8ccb0"/>
+      <path d="M0 0H120M0 35H120M60 0V35M0 35V70" stroke="#b3a07a" stroke-width="4"/>
+    </pattern>
+    <pattern id="studs" width="60" height="60" patternUnits="userSpaceOnUse">
+      <rect width="60" height="60" fill="#b83a2e"/>
+      <circle cx="30" cy="30" r="6" fill="#e2b53e"/>
+    </pattern>
+    <clipPath id="archC"><path d="M844 1536 V1060 A180 180 0 0 1 1204 1060 V1536 Z"/></clipPath>
+  </defs>
+
+  <rect width="2048" height="1536" fill="url(#sky)"/>
+  <circle cx="1024" cy="1040" r="760" fill="url(#halo)" opacity=".7"/>
+
+  <!-- 빛줄기 -->
+  <g fill="#fffbe6" opacity=".45">
+    <path d="M1024 1100 L 0 260 L 0 520 Z"/>
+    <path d="M1024 1100 L 300 0 L 560 0 Z"/>
+    <path d="M1024 1100 L 900 0 L 1150 0 Z"/>
+    <path d="M1024 1100 L 1500 0 L 1760 0 Z"/>
+    <path d="M1024 1100 L 2048 260 L 2048 520 Z"/>
+  </g>
+
+  <!-- 누각 지붕(2층) -->
+  <path d="M420 470 Q 560 520 760 512 L 1288 512 Q 1488 520 1628 470
+           Q 1520 450 1410 400 L 1280 360 L 768 360 L 638 400 Q 528 450 420 470 Z" fill="url(#tiles)"/>
+  <path d="M420 470 Q 560 520 760 512 L 1288 512 Q 1488 520 1628 470" fill="none" stroke="#2b3238" stroke-width="12" stroke-linecap="round"/>
+  <rect x="640" y="512" width="768" height="30" fill="url(#dancheong)"/>
+  <rect x="680" y="542" width="688" height="84" fill="#f3e7c9"/>
+  <g fill="#b83a2e"><rect x="696" y="542" width="28" height="84"/><rect x="880" y="542" width="28" height="84"/><rect x="1140" y="542" width="28" height="84"/><rect x="1324" y="542" width="28" height="84"/></g>
+  <rect x="944" y="556" width="160" height="56" rx="4" fill="#1e3a5f" stroke="#d9a520" stroke-width="6"/>
+  <g fill="#f2cf63"><rect x="972" y="574" width="26" height="20" rx="3"/><rect x="1011" y="574" width="26" height="20" rx="3"/><rect x="1050" y="574" width="26" height="20" rx="3"/></g>
+  <path d="M260 700 Q 420 752 640 744 L 1408 744 Q 1628 752 1788 700
+           Q 1680 680 1560 640 L 1400 610 L 648 610 L 488 640 Q 368 680 260 700 Z" fill="url(#tiles)"/>
+  <path d="M260 700 Q 420 752 640 744 L 1408 744 Q 1628 752 1788 700" fill="none" stroke="#2b3238" stroke-width="12" stroke-linecap="round"/>
+  <path d="M776 362 L 1272 362 L 1290 326 Q 1262 340 1240 342 L 808 342 Q 786 340 758 326 Z" fill="#2b3238"/>
+  <rect x="790" y="336" width="468" height="14" fill="#e8e2d4"/>
+  <rect x="360" y="744" width="1328" height="34" fill="url(#dancheong)"/>
+  <rect x="380" y="778" width="1288" height="44" fill="#f3e7c9"/>
+  <g fill="#b83a2e"><rect x="400" y="778" width="26" height="44"/><rect x="700" y="778" width="26" height="44"/><rect x="1011" y="778" width="26" height="44"/><rect x="1322" y="778" width="26" height="44"/><rect x="1622" y="778" width="26" height="44"/></g>
+
+  <!-- 돌 석축 -->
+  <rect x="160" y="822" width="1728" height="714" fill="url(#blocks)"/>
+  <rect x="160" y="822" width="1728" height="18" fill="#efe6d2"/>
+
+  <!-- 옆 홍예문(닫힘) -->
+  <g>
+    <path d="M420 1536 V1160 A140 140 0 0 1 700 1160 V1536 Z" fill="#efe6d2"/>
+    <path d="M440 1536 V1164 A120 120 0 0 1 680 1164 V1536 Z" fill="url(#studs)"/>
+    <rect x="557" y="1100" width="6" height="436" fill="#7a2018"/>
+  </g>
+  <g>
+    <path d="M1348 1536 V1160 A140 140 0 0 1 1628 1160 V1536 Z" fill="#efe6d2"/>
+    <path d="M1368 1536 V1164 A120 120 0 0 1 1608 1164 V1536 Z" fill="url(#studs)"/>
+    <rect x="1485" y="1100" width="6" height="436" fill="#7a2018"/>
+  </g>
+
+  <!-- 가운데 홍예문(열림): 빛이 들어온다 -->
+  <path d="M820 1536 V1060 A204 204 0 0 1 1228 1060 V1536 Z" fill="#efe6d2"/>
+  <path d="M844 1536 V1060 A180 180 0 0 1 1204 1060 V1536 Z" fill="url(#glow)"/>
+  <g clip-path="url(#archC)">
+    <!-- 문 너머 풍경: 먼 산과 길 -->
+    <path d="M844 1330 C 920 1290 980 1300 1024 1320 C 1080 1290 1150 1295 1204 1325 V1536 H844 Z" fill="#bfe3c4" opacity=".8"/>
+    <path d="M1000 1330 L 1048 1330 L 1130 1536 L 918 1536 Z" fill="#fff4d0"/>
+    <!-- 안쪽으로 열린 문짝 -->
+    <path d="M844 960 L 900 1000 L 900 1500 L 844 1536 Z" fill="url(#studs)"/>
+    <path d="M1204 960 L 1148 1000 L 1148 1500 L 1204 1536 Z" fill="url(#studs)"/>
+  </g>
+  <!-- 바닥으로 쏟아지는 빛 -->
+  <path d="M870 1536 L 1178 1536 L 1500 1536 L 548 1536 Z" fill="#fff8dc"/>
+
+  <!-- 반짝이 -->
+  <g fill="#ffffff">
+    <path d="M760 980 l10 -30 l10 30 l30 10 l-30 10 l-10 30 l-10 -30 l-30 -10 z"/>
+    <path d="M1300 900 l8 -24 l8 24 l24 8 l-24 8 l-8 24 l-8 -24 l-24 -8 z"/>
+    <path d="M1250 1180 l6 -18 l6 18 l18 6 l-18 6 l-6 18 l-6 -18 l-18 -6 z"/>
+    <path d="M700 1300 l6 -18 l6 18 l18 6 l-18 6 l-6 18 l-6 -18 l-18 -6 z"/>
+    <circle cx="1120" cy="250" r="6"/><circle cx="900" cy="200" r="5"/><circle cx="1500" cy="300" r="7"/><circle cx="540" cy="320" r="6"/>
+  </g>
+</svg>
