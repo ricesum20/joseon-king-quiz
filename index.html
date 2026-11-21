@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <title>조선의 왕 퀴즈</title>
+  <meta name="description" content="조선의 왕 27명을 맞히는 궁궐 탈출 퀴즈">
+  <meta name="theme-color" content="#c8372d">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="images/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="조선왕퀴즈">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- 무료 웹폰트: 제목(붓글씨) + 본문(고딕). 오프라인이면 시스템 글꼴로 대신한다. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&family=Nanum+Gothic:wght@400;700;800&display=swap">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app" class="app">
+    <!-- 배경: 이미지가 없으면 CSS 단청 도형이 보인다 -->
+    <div class="bg bg-palace" aria-hidden="true"></div>
+    <div class="bg bg-escape" aria-hidden="true"></div>
+
+    <button id="soundBtn" class="sound-btn" type="button" aria-label="소리 끄기" aria-pressed="true">🔊</button>
+    <div id="testBadge" class="test-badge" hidden>테스트 모드 · 3문제</div>
+
+    <!-- 1. 시작 화면 -->
+    <section id="screen-start" class="screen is-active" aria-labelledby="startTitle">
+      <div class="start-inner">
+        <p class="start-sub">궁궐을 탈출하라!</p>
+        <h1 id="startTitle" class="title">조선의 왕 퀴즈</h1>
+        <div class="king-slot" data-img>
+          <img src="images/king.png" alt="곤룡포를 입은 왕 캐릭터" onerror="this.parentNode.classList.add('img-missing')">
+          <div class="shape-king" aria-hidden="true"><span class="sk-hat"></span><span class="sk-face"></span><span class="sk-robe"></span></div>
+        </div>
+        <div class="start-buttons">
+          <button id="resumeBtn" class="btn btn-primary btn-xl" type="button" hidden>이어서 하기</button>
+          <button id="startBtn" class="btn btn-primary btn-xl" type="button">시작하기</button>
+          <button id="rankBtn" class="btn btn-secondary btn-lg" type="button">순위 보기</button>
+        </div>
+        <p id="resumeInfo" class="resume-info" hidden></p>
+      </div>
+    </section>
+
+    <!-- 2. 문제 화면 -->
+    <section id="screen-quiz" class="screen" aria-label="문제">
+      <header class="topbar">
+        <span class="tb-item">문제 <b id="qCount">1 / 27</b></span>
+        <span class="tb-item">점수 <b id="qScore">100점</b></span>
+        <span class="tb-item">걸린 시간 <b id="qTime">00:00</b></span>
+      </header>
+
+      <div class="quiz-main">
+        <article class="card" id="card">
+          <span id="qBadge" class="badge">제1대</span>
+          <p id="qText" class="q-text"></p>
+          <div class="seal-slot" id="sealSlot" data-img aria-hidden="true">
+            <img src="images/seal.png" alt="" onerror="this.parentNode.classList.add('img-missing')">
+            <div class="shape-seal"><span>正答</span></div>
+          </div>
+          <div id="popMinus" class="pop-minus" aria-hidden="true"></div>
+        </article>
+
+        <form id="answerForm" class="answer-row" autocomplete="off" novalidate>
+          <input id="answerInput" class="answer-input" type="text" inputmode="text" lang="ko"
+                 placeholder="정답을 적어 주세요" aria-label="정답 입력"
+                 autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+                 enterkeyhint="done" maxlength="20">
+          <button id="submitBtn" class="btn btn-primary btn-submit" type="submit">제출</button>
+        </form>
+
+        <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+        <div id="hint" class="hint" aria-live="polite" hidden></div>
+      </div>
+    </section>
+
+    <!-- 3. 결과 화면 -->
+    <section id="screen-result" class="screen" aria-labelledby="resultTitle">
+      <div class="panel result-panel">
+        <h2 id="resultTitle" class="result-title">탈출 성공!</h2>
+        <p id="resultSub" class="result-sub"></p>
+        <div class="result-score"><span id="rScore">100</span><small>점</small></div>
+        <p class="result-time">걸린 시간 <b id="rTime">00:00</b></p>
+        <ul class="result-stats">
+          <li><span>한 번에 맞힘</span><b id="rFirst">0</b>개</li>
+          <li><span>힌트 받고 맞힘</span><b id="rHint">0</b>개</li>
+          <li><span>못 맞힘</span><b id="rMiss">0</b>개</li>
+        </ul>
+        <div id="missedBox" class="missed-box" hidden>
+          <h3>못 맞힌 문제 다시 보기</h3>
+          <ol id="missedList" class="missed-list"></ol>
+        </div>
+        <form id="saveForm" class="save-row" autocomplete="off" novalidate>
+          <label for="nameInput" class="save-label">닉네임(1~8글자)</label>
+          <div class="save-inputs">
+            <input id="nameInput" class="name-input" type="text" lang="ko" maxlength="8"
+                   placeholder="닉네임" autocomplete="off" autocorrect="off" autocapitalize="off"
+                   spellcheck="false" enterkeyhint="done">
+            <button class="btn btn-primary btn-lg" type="submit">기록 저장</button>
+          </div>
+          <p id="saveMsg" class="save-msg" role="status" aria-live="polite"></p>
+        </form>
+        <button id="skipSaveBtn" class="btn btn-ghost" type="button">저장하지 않고 처음으로</button>
+      </div>
+    </section>
+
+    <!-- 4. 순위표 화면 -->
+    <section id="screen-rank" class="screen" aria-labelledby="rankTitle">
+      <div class="panel rank-panel">
+        <h2 id="rankTitle" class="rank-title">명예의 전당</h2>
+        <p id="rankMode" class="rank-mode" hidden>테스트 모드 기록</p>
+        <table class="rank-table">
+          <thead><tr><th>순위</th><th>닉네임</th><th>점수</th><th>시간</th><th>날짜</th></tr></thead>
+          <tbody id="rankBody"></tbody>
+        </table>
+        <p id="rankEmpty" class="rank-empty" hidden>아직 기록이 없어요. 첫 번째 주인공이 되어 보세요!</p>
+        <p id="myRank" class="my-rank" hidden></p>
+        <div class="rank-buttons">
+          <button id="againBtn" class="btn btn-primary btn-lg" type="button">다시 하기</button>
+          <button id="homeBtn" class="btn btn-secondary btn-lg" type="button">처음으로</button>
+        </div>
+        <button id="clearBtn" class="btn btn-danger hold-btn" type="button">
+          <span class="hold-fill" aria-hidden="true"></span>
+          <span class="hold-label">기록 지우기 (3초 길게 누르기)</span>
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
