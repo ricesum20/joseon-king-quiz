@@ -241,8 +241,9 @@ button, input { font: inherit; color: inherit; }
   position: absolute; right: 18px; bottom: -10px;
   width: 140px; height: 140px; pointer-events: none;
   opacity: 0; transform: scale(2.2) rotate(-18deg);
+  display: none; /* 찍을 때만 보인다. 투명도로만 숨기면 일부 휴대폰(사파리)에서 잔상이 남는다 */
 }
-.seal-slot.stamp { animation: stamp .45s cubic-bezier(.2,1.6,.4,1) forwards; }
+.seal-slot.stamp { display: block; animation: stamp .45s cubic-bezier(.2,1.6,.4,1) forwards; }
 @keyframes stamp {
   0% { opacity: 0; transform: scale(2.2) rotate(-18deg); }
   100% { opacity: .95; transform: scale(1) rotate(-12deg); }
@@ -253,8 +254,9 @@ button, input { font: inherit; color: inherit; }
   font-size: 64px; font-weight: 800; color: var(--bad);
   text-shadow: 0 3px 0 #fff;
   opacity: 0; pointer-events: none;
+  display: none;
 }
-.pop-minus.show { animation: popUp 1s ease-out forwards; }
+.pop-minus.show { display: block; animation: popUp 1s ease-out forwards; }
 @keyframes popUp {
   0% { opacity: 0; transform: translateY(20px) scale(.6); }
   20% { opacity: 1; transform: translateY(0) scale(1.15); }

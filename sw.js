@@ -1,7 +1,7 @@
 /* 조선의 왕 퀴즈 — 서비스 워커 (오프라인 실행)
  * 파일을 고쳤으면 CACHE_VERSION 숫자를 올려야 태블릿이 새 파일을 받는다.
  */
-const CACHE_VERSION = "jkq-v3";
+const CACHE_VERSION = "jkq-v4";
 const FONT_CACHE = "jkq-fonts";
 
 const APP_FILES = [

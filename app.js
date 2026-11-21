@@ -141,6 +141,7 @@
   let game = null;
   let busy = false;          // 1.5초 넘어가는 동안 입력 막기
   let lastResult = null;
+  let popTimer = null;
 
   function newGame() {
     const all = shuffle(QUESTIONS.map((q) => q.no));
@@ -219,7 +220,9 @@
     el.input.value = "";
     el.input.className = "answer-input";
     el.input.readOnly = false;
+    // 이전 문제의 도장·감점 표시를 화면에서 완전히 뺀다(display: none)
     el.sealSlot.classList.remove("stamp");
+    el.popMinus.classList.remove("show");
     renderHint();
     busy = false;
   }
@@ -285,6 +288,8 @@
     el.qScore.textContent = `${score()}점`;
     el.popMinus.textContent = `-${minus}`;
     restart("show", el.popMinus);
+    clearTimeout(popTimer);
+    popTimer = setTimeout(() => el.popMinus.classList.remove("show"), 1100);
     restart("shake", el.card);
     el.input.classList.add("bad");
     Sound.wrong();
